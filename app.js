@@ -4,10 +4,9 @@ let numeroSecreto  = gerarNumeroAleatorio();
 let tentativas = 1;
 
 function exibirTextoNaTela(tag, texto){
-
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
-
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Famale', {rate:1.5});
 }
 
 function exibirMensagemInicial() {
@@ -18,6 +17,7 @@ function exibirMensagemInicial() {
 exibirMensagemInicial();
 
 function verificarChute() {
+
     let chute = document.querySelector('input').value;
 
     if(chute == numeroSecreto) {
