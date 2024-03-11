@@ -19,25 +19,36 @@ exibirMensagemInicial();
 function verificarChute() {
 
     let chute = document.querySelector('input').value;
-
-    if(chute == numeroSecreto) {
-        exibirTextoNaTela('h1', 'Acertou!');
-        let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
-        let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
-        exibirTextoNaTela('p', mensagemTentativas);
-        document.getElementById('reiniciar').removeAttribute('disabled');
+    if (chute < 0) {
+        exibirTextoNaTela('h1','Número menor que o permitido');
+        exibirTextoNaTela('p', 'Tente novamente com um valor maior que 0!')
+        return
+    }
+    else if (chute > 10) {
+        exibirTextoNaTela('h1', 'Número maior que o permitido');
+        exibirTextoNaTela('p', 'Tente novamente com um valor menor que 10!')  
+        return
     }
     else {
-        if(chute > numeroSecreto) { //se o chute for maior que o número secreto
-            exibirTextoNaTela('h1', 'Ooops!');
-            exibirTextoNaTela('p', 'O número secreto é menor!');
+        if(chute == numeroSecreto) {
+            exibirTextoNaTela('h1', 'Acertou!');
+            let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+            let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
+            exibirTextoNaTela('p', mensagemTentativas);
+            document.getElementById('reiniciar').removeAttribute('disabled');
         }
-        else { //se o chute for menor que o número secreto
-            exibirTextoNaTela('h1', 'Ooops!');
-            exibirTextoNaTela('p', 'O número secreto é maior!');
+        else {
+            if(chute > numeroSecreto) { //se o chute for maior que o número secreto
+                exibirTextoNaTela('h1', 'Ooops!');
+                exibirTextoNaTela('p', 'O número secreto é menor!');
+            }
+            else { //se o chute for menor que o número secreto
+                exibirTextoNaTela('h1', 'Ooops!');
+                exibirTextoNaTela('p', 'O número secreto é maior!');
+            }
+            tentativas++;
+            limparCampo();
         }
-        tentativas++;
-        limparCampo();
     }
 }
 
